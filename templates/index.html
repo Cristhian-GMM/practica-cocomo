@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimación COCOMO Completa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>ESTIMACION DE ESFUERZO Y COSTO CON COCOMO</h1>
+    </header>
+
+    <div class="calculator">
+        <form method="POST">
+            <div class="form-group">
+                <label for="entrada"> Numero de Entradas:</label>
+                <input type="number" id="entrada" name="entrada" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="salida">Numero de Salidas:</label>
+                <input type="number" id="salida" name="salida" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="factor_organico">Factor Orgánico (50-80):</label>
+                <input type="number" id="factor_organico" name="factor_organico" min="50" max="80" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="factor_semi_aplicado">Factor Semi Acoplado (81-100):</label>
+                <input type="number" id="factor_semi_aplicado" name="factor_semi_aplicado" min="81" max="100" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="factor_acoplado">Factor Acoplado (101-150):</label>
+                <input type="number" id="factor_acoplado" name="factor_acoplado" min="101" max="150" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo_proyecto">Selecciona el tipo de proyecto:</label>
+                <select name="tipo_proyecto" id="tipo_proyecto" required>
+                    <option value="organico">Orgánico</option>
+                    <option value="semi_aplicado">Semi-Aplicado</option>
+                    <option value="acoplado">Acoplado</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="salario">Salario por persona:</label>
+                <input type="number" id="salario" name="salario" step="any" required>
+            </div>
+
+            <button type="submit" class="btn">Calcular</button>
+        </form>
+
+        {% if total is not none %}
+        <section class="results">
+            <h2>Resultados</h2>
+            <p><strong>Total:</strong> {{ total }}</p>
+            <p><strong>LDC:</strong> {{ ldc }}</p>
+            <p><strong>MLDC:</strong> {{ mldc }}</p>
+            <p><strong>Esfuerzo (E):</strong> {{ esfuerzo }}</p>
+            <p><strong>Tiempo de Desarrollo (TD):</strong> {{ td }}</p>
+            <p><strong>Personal Necesario (CP):</strong> {{ cp }}</p>
+            <p><strong>Estimación de la Productividad (P):</strong> {{ p }}</p>
+            <p><strong>Costo del Software:</strong> {{ costo }} Bs</p>
+            <p><strong>Costo por Línea de Código (LDC):</strong> {{ costo_ldc }} Bs</p>
+        </section>
+        {% endif %}
+    </div>
+</body>
+</html>
